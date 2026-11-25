@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beauty Analyzer | Discover Your Glow</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="#" class="brand">
+      <span class="brand-icon">✿</span>
+      <span>beauty<span class="brand-light">.analyzer</span></span>
+    </a>
+    <span class="top-label">YOUR PERSONAL BEAUTY SPACE ♡</span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">A LITTLE SELF-CARE MOMENT</span>
+        <h1>Discover your<br><span>natural glow.</span></h1>
+        <p>
+          Kenali warna kulitmu dan temukan inspirasi warna hijab
+          serta makeup yang cocok untukmu.
+        </p>
+        <a class="primary-btn" href="#scanner">Mulai pemindaian <span>↗</span></a>
+      </div>
+
+      <div class="hero-art">
+        <div class="art-circle circle-one"></div>
+        <div class="art-circle circle-two"></div>
+        <div class="art-card">
+          <span class="sparkle">✦</span>
+          <div class="art-flower">✿</div>
+          <span class="art-caption">your beauty, your way</span>
+        </div>
+        <span class="floating-heart">♡</span>
+        <span class="floating-star">✧</span>
+      </div>
+    </section>
+
+    <section class="steps">
+      <div class="step">
+        <span class="step-number">01</span>
+        <div><b>Scan your face</b><small>Gunakan kamera langsung</small></div>
+      </div>
+      <div class="step">
+        <span class="step-number">02</span>
+        <div><b>Explore your tone</b><small>Lihat perkiraan warna kulit</small></div>
+      </div>
+      <div class="step">
+        <span class="step-number">03</span>
+        <div><b>Find your colors</b><small>Jelajahi inspirasi warna</small></div>
+      </div>
+    </section>
+
+    <section id="scanner" class="scanner-section">
+      <div class="section-heading">
+        <span class="eyebrow">LET'S GET TO KNOW YOU</span>
+        <h2>Your beauty scanner</h2>
+        <p>Posisikan wajah di tengah kamera, lalu mulai pemindaian.</p>
+      </div>
+
+      <div class="scanner-layout">
+        <div class="camera-card">
+          <div class="camera-top">
+            <div>
+              <span class="live-dot"></span>
+              <span id="cameraStatus">Kamera belum aktif</span>
+            </div>
+            <span class="camera-tag">LIVE SCANNER</span>
+          </div>
+
+          <div class="camera-view" id="cameraView">
+            <video id="video" autoplay playsinline muted></video>
+            <canvas id="overlay"></canvas>
+
+            <div class="camera-placeholder" id="placeholder">
+              <div class="camera-icon">♡</div>
+              <h3>Ready for your glow?</h3>
+              <p>Aktifkan kamera untuk memulai.</p>
+            </div>
+
+            <div class="scan-frame">
+              <span class="corner tl"></span>
+              <span class="corner tr"></span>
+              <span class="corner bl"></span>
+              <span class="corner br"></span>
+            </div>
+
+            <div id="scanLine" class="scan-line"></div>
+            <div id="faceBadge" class="face-badge">✦ Wajah terdeteksi</div>
+          </div>
+
+          <div class="camera-actions">
+            <button id="startCamera" class="primary-btn">Aktifkan kamera ↗</button>
+            <button id="scanButton" class="secondary-btn" disabled>Scan wajah ✧</button>
+            <button id="stopCamera" class="text-btn" disabled>Matikan kamera</button>
+          </div>
+          <p class="privacy-note">♡ Kamera memerlukan izin dari browser. Foto tidak diunggah oleh kode ini.</p>
+          <p id="scanMessage" class="message" aria-live="polite"></p>
+        </div>
+
+        <aside class="guide-card">
+          <span class="guide-icon">✿</span>
+          <h3>Little tips for you</h3>
+          <p>Supaya perkiraan warna kulit lebih mendekati warna aslinya:</p>
+          <ul>
+            <li><span>♡</span> Gunakan cahaya alami yang merata.</li>
+            <li><span>♡</span> Hindari cahaya yang terlalu kuning atau biru.</li>
+            <li><span>♡</span> Lepaskan filter kamera jika ada.</li>
+            <li><span>♡</span> Hadapkan wajah ke kamera dengan posisi lurus.</li>
+          </ul>
+          <div class="guide-note">
+            <span>✦</span>
+            <p>Hasil ini adalah perkiraan warna dari kamera, bukan diagnosis kulit profesional.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="results" class="results-section">
+      <div class="section-heading">
+        <span class="eyebrow">MADE JUST FOR YOU</span>
+        <h2>Your beauty dashboard</h2>
+        <p>Hasil akan diperbarui setelah kamu melakukan scan wajah.</p>
+      </div>
+
+      <div class="result-grid">
+        <article class="result-card tone-card">
+          <span class="card-kicker">01 / SKIN COLOR</span>
+          <h3>Your sampled tone</h3>
+          <div class="skin-swatch" id="skinSwatch"></div>
+          <p id="toneName" class="result-name">Belum dianalisis</p>
+          <p id="toneDescription" class="result-description">
+            Mulai scan untuk mengambil perkiraan warna dari area wajah.
+          </p>
+          <div class="hex-row">
+            <span id="hexValue">#D9B8A8</span>
+            <button id="copyHex" class="copy-btn">Salin HEX</button>
+          </div>
+        </article>
+
+        <article class="result-card">
+          <span class="card-kicker">02 / UNDERTONE</span>
+          <h3>Possible undertone</h3>
+          <div class="undertone-icon">☼</div>
+          <p id="undertoneName" class="result-name">Menunggu scan</p>
+          <p id="undertoneDescription" class="result-description">
+            Perkiraan undertone belum tersedia.
+          </p>
+          <span class="small-disclaimer">Perkiraan otomatis · dapat keliru</span>
+        </article>
+
+        <article class="result-card">
+          <span class="card-kicker">03 / COLOR MOOD</span>
+          <h3>Your color palette</h3>
+          <div id="palette" class="palette">
+            <span style="background:#D8B5A5"></span>
+            <span style="background:#B98278"></span>
+            <span style="background:#C9B8DC"></span>
+            <span style="background:#8F7A9E"></span>
+            <span style="background:#E9D8CE"></span>
+          </div>
+          <p class="result-name">Soft & lovely</p>
+          <p class="result-description">Palet warna awal. Hasil rekomendasi akan menyesuaikan perkiraan tone.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="recommendations">
+      <div class="section-heading">
+        <span class="eyebrow">A LITTLE COLOR MAGIC</span>
+        <h2>Colors to explore</h2>
+        <p>Inspirasi warna hijab dan makeup yang bisa kamu coba.</p>
+      </div>
+
+      <div class="recommendation-grid">
+        <article class="recommend-card">
+          <div class="recommend-icon">♡</div>
+          <h3>Hijab inspiration</h3>
+          <p id="hijabDescription">Warna lembut untuk inspirasi tampilan sehari-hari.</p>
+          <div id="hijabColors" class="color-list">
+            <span style="background:#D8C4D8" title="Dusty lilac"></span>
+            <span style="background:#E8D7C8" title="Cream"></span>
+            <span style="background:#B98D86" title="Dusty rose"></span>
+            <span style="background:#A7AA91" title="Sage"></span>
+          </div>
+        </article>
+
+        <article class="recommend-card">
+          <div class="recommend-icon">✧</div>
+          <h3>Makeup inspiration</h3>
+          <p id="makeupDescription">Jelajahi warna blush, lipstik, dan eyeshadow.</p>
+          <div id="makeupColors" class="color-list">
+            <span style="background:#D98D91" title="Rose"></span>
+            <span style="background:#BD7779" title="Mauve"></span>
+            <span style="background:#C58A68" title="Peach"></span>
+            <span style="background:#A77C88" title="Mauve brown"></span>
+          </div>
+        </article>
+      </div>
+      <p class="footer-note">Beauty Analyzer · Celebrate your own kind of beauty ♡</p>
+    </section>
+  </main>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
